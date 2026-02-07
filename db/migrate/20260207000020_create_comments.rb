@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+
+class CreateComments < ActiveRecord::Migration[8.0]
+  def change
+    create_table :comments do |t|
+      t.text :content, null: false
+      t.boolean :is_internal, default: false
+      t.integer :comment_type, default: 0, null: false
+      t.references :ticket, null: false, foreign_key: true
+      t.references :user, null: false, foreign_key: true
+
+      t.timestamps
+    end
+  end
+end
